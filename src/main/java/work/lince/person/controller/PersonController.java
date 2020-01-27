@@ -17,7 +17,7 @@ import work.lince.person.service.PersonService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/persons")
+@RequestMapping(path = "/people")
 public class PersonController {
 
     @Autowired

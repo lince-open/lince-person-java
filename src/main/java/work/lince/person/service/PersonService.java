@@ -21,10 +21,10 @@ public class PersonService {
     @Autowired
     protected AuthenticationService authenticationService;
 
-    public Person create(Person project) {
-        project.setOwner(authenticationService.getAuthenticatedUser());
-        project.setStatus(PersonStatus.CREATED);
-        return repository.save(project);
+    public Person create(Person person) {
+        person.setOwner(authenticationService.getAuthenticatedUser());
+        person.setStatus(PersonStatus.ACTIVE);
+        return repository.save(person);
     }
 
     public List<Person> findAll() {

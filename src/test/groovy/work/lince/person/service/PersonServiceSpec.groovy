@@ -22,34 +22,34 @@ class PersonServiceSpec extends Specification {
     }
 
     @Unroll
-    def "verify with #title"() {
+    def "verify with #name"() {
         given:
             1 * service.repository.save(_) >> { Person value ->
                 value.id = id
                 return value
             }
             1 * service.authenticationService.getAuthenticatedUser() >> { user }
-            def project = new Person(
-                title: title,
+            def person = new Person(
+                name: name,
                 status: status,
                 owner: owner
             )
         when:
-            def result = service.create(project)
+            def result = service.create(person)
 
         then:
             result != null
             result.id == id
-            result.title == title
+            result.name == name
             result.owner == user
-            result.status == PersonStatus.CREATED
+            result.status == PersonStatus.ACTIVE
 
         where:
-            title             | status               | owner      | user   | id
-            "Project Title 1" | null                 | "asdfasdf" | "asdf" | 1L
-            "Project Title 2" | PersonStatus.CLOSED | null       | "qwer" | 2L
-            "Project Title 3" | null                 | null       | "asdf" | 3L
-            "Project Title 4" | PersonStatus.CLOSED | "asdfasdf" | "qwer" | 4L
+            name       | status                | owner      | user   | id
+            "Nome 1"   | null                  | "asdfasdf" | "asdf" | 1L
+            "Nome 2"   | PersonStatus.INACTIVE | null       | "qwer" | 2L
+            "Nome 3"   | null                  | null       | "asdf" | 3L
+            "Nome 4"   | PersonStatus.INACTIVE | "asdfasdf" | "qwer" | 4L
 
 
     }

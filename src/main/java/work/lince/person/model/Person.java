@@ -31,11 +31,8 @@ public class Person {
     private Long id;
 
     @NotEmpty
-    @Column(name = "TITLE",length = 50)
-    private String title;
-
-    @Column(name = "DESCRIPTION",length = 250)
-    private String description;
+    @Column(name = "NAME",length = 50)
+    private String name;
 
     @Column(name = "STATUS",length = 20)
     @Enumerated(EnumType.STRING)

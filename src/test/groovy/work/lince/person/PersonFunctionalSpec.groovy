@@ -12,7 +12,7 @@ import work.lince.person.model.Person
 import work.lince.person.model.PersonStatus
 import work.lince.person.repository.PersonRepository
 /**
- * @author pzatta
+ * @author izatta
  */
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -35,47 +35,45 @@ class PersonFunctionalSpec extends Specification {
     @Unroll
     def "get Success"() {
         given:
-            projectRepository.save(new Person(title: title))
+            projectRepository.save(new Person(name: name))
 
         when:
-            def result = client.get(path: "projects")
+            def result = client.get(path: "people")
 
         then:
             result != null
 
-
         where:
-            title            | _
-            "Projet Title 1" | _
-
+            name     | _
+            "Nome 1" | _
 
     }
 
 
     @Unroll
-    def "Create Projetc #title"() {
+    def "Create Person #name"() {
         given:
             def body = [
-                title: title,
+                name: name,
                 status : status
             ]
 
 
         when:
-            def result = client.post(path: "projects", body: body, headers: ["lince.user.name": userName])
+            def result = client.post(path: "people", body: body, headers: ["lince.user.name": userName])
 
         then:
             result != null
             result.data.id != null
-            result.data.title == title
-            result.data.status == PersonStatus.CREATED.toString()
+            result.data.name == name
+            result.data.status == PersonStatus.ACTIVE.toString()
             result.data.owner == expectedOwner
 
         where:
-            title             | userName   | status                || expectedOwner
-            "Project Title 1" | null       | null                  || 'anonymous'
-            "Project Title 2" | 'x1324'    | PersonStatus.CREATED || 'x1324'
-            "Project Title 3" | 'zxcvasdf' | PersonStatus.CLOSED  || 'zxcvasdf'
+            name     | userName   | status                || expectedOwner
+            "Nome 1" | null       | null                  || 'anonymous'
+            "Nome 2" | 'x1324'    | PersonStatus.ACTIVE   || 'x1324'
+            "Nome 3" | 'zxcvasdf' | PersonStatus.INACTIVE || 'zxcvasdf'
 
 
     }
