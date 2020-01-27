@@ -38,9 +38,9 @@ public class PersonService {
     }
 
     public void remove(Long id) {
-        Person project = repository.findById(id)
+        Person person = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException());
-        repository.delete(project);
+        repository.delete(person);
     }
 
 }

@@ -25,7 +25,7 @@ class PersonFunctionalSpec extends Specification {
     int port;
 
     @Autowired
-    PersonRepository projectRepository
+    PersonRepository personRepository
 
     def setup() {
         client = new RESTClient("http://localhost:${port}/")
@@ -35,7 +35,7 @@ class PersonFunctionalSpec extends Specification {
     @Unroll
     def "get Success"() {
         given:
-            projectRepository.save(new Person(name: name))
+            personRepository.save(new Person(name: name))
 
         when:
             def result = client.get(path: "people")
