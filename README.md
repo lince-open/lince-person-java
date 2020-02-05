@@ -9,6 +9,7 @@ Quando uma pessoa é adicionada, o usuário autenticado é registrado como owner
 * Testes Funcionais com JUnit/Spock/Groove
 * Swagger2
 * Docker
+* Spring Actuator
 
 ![](https://github.com/lince-open/lince-person-java/workflows/Java%20CI/badge.svg)
 [![Known Vulnerabilities](https://snyk.io/test/github/lince-open/lince-person-java/badge.svg)](https://snyk.io/test/github/pedrozatta/lince-person-java)
