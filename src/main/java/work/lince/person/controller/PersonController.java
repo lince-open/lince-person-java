@@ -1,5 +1,6 @@
 package work.lince.person.controller;
 
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -23,24 +24,28 @@ public class PersonController {
     @Autowired
     protected PersonService service;
 
+    @Timed("lince.person.create")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Person create(@RequestBody @Validated Person body) {
         return service.create(body);
     }
 
+    @Timed("lince.person.find-all")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Person> findAll() {
         return service.findAll();
     }
 
+    @Timed("lince.person.find-by-id")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Person findById(@PathVariable("id") final Long id) {
         return service.findById(id);
     }
 
+    @Timed("lince.person.remove-by-id")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void remove(@PathVariable("id") final Long id) {
