@@ -1,11 +1,30 @@
 server:
-  port: 8080
+  port: ${LINCE_PERSON_PORT:8080}
 
 spring:
+  application:
+    name: @project.artifactId@
+
+  profiles:
+    include: management
+
   jackson:
     default-property-inclusion: non_null
+    time-zone: America/Sao_Paulo
 
   datasource:
-    url: jdbc:h2:mem:example
-    platform: h2
-    pool-size: 10
+    url: ${LINCE_PERSON_DATASOURCE_URL:jdbc:h2:mem:lince-db}
+    username: ${LINCE_PERSON_DATASOURCE_USER:linceuser}
+    password: ${LINCE_PERSON_DATASOURCE_PASS:lincepass}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: ${LINCE_PERSON_DATASOURCE_DIALECT:}
+
+logging:
+  level:
+    work:
+      lince: ${LINCE_LOG_LEVEL:INFO}
