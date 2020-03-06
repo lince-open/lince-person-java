@@ -5,7 +5,7 @@
 
     <groupId>lince-open</groupId>
     <artifactId>lince-person</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.7</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
