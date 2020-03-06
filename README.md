@@ -20,7 +20,7 @@ Quando uma pessoa é adicionada, o usuário autenticado é registrado como owner
 
 https://hub.docker.com/repository/docker/linceopen/lince-person
 
-mvn clean package dockerfile:build
+mvn clean -Dmaven.test.skip=true package dockerfile:build
 
 docker run  --name lince-person -p 8080:8080 -t lince-open/lince-person:latest
 
